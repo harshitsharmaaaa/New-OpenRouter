@@ -1,135 +1,299 @@
-# Turborepo starter
+# 🚀 OpenRouter - Multi-AI Router Platform
 
-This Turborepo starter is maintained by the Turborepo core team.
+A modern, full-stack application that provides unified access to multiple AI providers including OpenAI, Anthropic Claude, and Google's Generative AI. Built with cutting-edge technologies and optimized for performance.
 
-## Using this example
+## ✨ Features
 
-Run the following command:
+### 🎯 Multi-AI Integration
+- **OpenAI API Support** - Access to GPT models and advanced AI capabilities
+- **Anthropic Claude Integration** - Enterprise-grade AI reasoning
+- **Google Generative AI** - Google's latest AI models
+- **Unified API Interface** - Single endpoint to route requests to any AI provider
+- **Bearer Token Authentication** - Secure API access with token-based auth
 
-```sh
-npx create-turbo@latest
-```
+### 🎨 Modern Dashboard
+- **React 19 Frontend** - Latest React with improved performance
+- **TailwindCSS Styling** - Beautiful, responsive UI
+- **Shadcn Components** - High-quality component library
+- **React Router** - Smooth client-side navigation
+- **TanStack Query** - Powerful data fetching and caching
 
-## What's inside?
+### ⚡ High-Performance Backend
+- **Elysia Framework** - Ultra-fast TypeScript web framework
+- **Bun Runtime** - Lightning-fast JavaScript runtime
+- **Hot Module Reload** - Development with instant updates
+- **Type-Safe** - Full TypeScript support
 
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
+## 📊 Project Architecture
 
 ```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+New-OpenRouter (Monorepo)
+├── 📦 Root Configuration
+│   ├── turbo.json          # Turborepo build orchestration
+│   ├── package.json        # Monorepo workspace setup
+│   └── bun.lock            # Bun package manager lockfile
+│
+├── 🏗️ apps/
+│   ├── api-backend/
+│   │   ├── src/
+│   │   │   └── index.ts    # Elysia server entry point
+│   │   ├── package.json    # Backend dependencies
+│   │   └── tsconfig.json   # TypeScript configuration
+│   │
+│   └── dashboard-frontend/
+│       ├── src/            # React components & pages
+│       ├── styles/         # TailwindCSS styles
+│       ├── build.ts        # Bun build configuration
+│       ├── package.json    # Frontend dependencies
+│       └── tsconfig.json   # TypeScript configuration
+│
+└── 📚 packages/
+    └── [Shared libraries & utilities]
 ```
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+## 🏗️ System Architecture
 
 ```
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
+┌─────────────────────────────────────────────────────────────┐
+│                    CLIENT LAYER                              │
+│  ┌─────────────────────────────────────────────────────────┐│
+│  │     React 19 Dashboard Frontend (Port 3001)            ││
+│  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐ ││
+│  │  │ React Router │  │ TanStack     │  │ Shadcn       │ ││
+│  │  │ Navigation   │  │ Query (Data) │  │ Components   │ ││
+│  │  └──────────────┘  └──────────────┘  └──────────────┘ ││
+│  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐ ││
+│  │  │ TailwindCSS  │  │ Lucide Icons │  │ Form Handler │ ││
+│  │  │ Styling      │  │              │  │              │ ││
+│  │  └──────────────┘  └──────────────┘  └──────────────┘ ││
+│  └─────────────────────────────────────────────────────────┘│
+└────────────────────────┬────────────────────────────────────┘
+                         │
+                         │ HTTP/REST
+                         │
+┌────────────────────────┴────────────────────────────────────┐
+│                    API LAYER                                 │
+│  ┌─────────────────────────────────────────────────────────┐│
+│  │    Elysia Backend Server (Port 3000)                   ││
+│  │  ┌──────────────────────────────────────────────────┐  ││
+│  │  │          Bearer Token Authentication             │  ││
+│  │  └──────────────────────────────────────────────────┘  ││
+│  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐ ││
+│  │  │ OpenAI API   │  │ Anthropic    │  │ Google       │ ││
+│  │  │ Integration  │  │ Claude SDK   │  │ GenAI SDK    │ ││
+│  │  └──────────────┘  └──────────────┘  └──────────────┘ ││
+│  └─────────────────────────────────────────────────────────┘│
+└────────────────────────┬────────────────────────────────────┘
+                         │
+    ┌────────────────────┼────────────────────┐
+    │                    │                    │
+┌───▼────┐          ┌───▼────┐          ┌───▼────┐
+│ OpenAI │          │Anthropic│         │ Google │
+│ Cloud  │          │ Claude  │         │ GenAI  │
+└────────┘          └────────┘         └────────┘
 ```
 
-### Develop
+## 🛠️ Technology Stack
 
-To develop all apps and packages, run the following command:
+### Backend
+- **Runtime**: Bun 1.2.2 (Ultra-fast JavaScript runtime)
+- **Framework**: Elysia (High-performance TypeScript web framework)
+- **Language**: TypeScript 5.9.2
+- **Auth**: Bearer Token with @elysiajs/bearer
+- **AI SDKs**:
+  - OpenAI SDK v6.25.0
+  - Anthropic SDK v0.78.0
+  - Google GenAI SDK v1.42.0
 
+### Frontend
+- **Framework**: React 19
+- **Language**: TypeScript
+- **Styling**: TailwindCSS 4.1.11
+- **Components**: shadcn/ui with Radix UI primitives
+- **Routing**: React Router 7.13.0
+- **State Management**: TanStack Query 5.90.21
+- **Icons**: Lucide React 0.545.0
+- **Build Tool**: Bun with custom build configuration
+
+### Monorepo Management
+- **Orchestration**: Turborepo 2.8.10 (Build system optimization)
+- **Package Manager**: Bun 1.2.2
+- **Code Quality**: 
+  - ESLint (Linting)
+  - Prettier 3.7.4 (Code formatting)
+  - TypeScript (Type checking)
+
+## 📋 Project Features
+
+### Backend Capabilities
+✅ Multi-provider AI routing (OpenAI, Claude, Google GenAI)
+✅ RESTful API endpoints with Elysia
+✅ Bearer token authentication and authorization
+✅ Type-safe TypeScript implementation
+✅ Fast startup and response times with Bun
+✅ Hot reload development mode
+
+### Frontend Features
+✅ Interactive dashboard UI
+✅ Real-time data fetching with React Query
+✅ Responsive design with TailwindCSS
+✅ Accessible component library (shadcn/ui)
+✅ Smooth page transitions with React Router
+✅ Modern React 19 hooks and features
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Bun 1.2.2 or higher
+- Node.js 18 or higher
+- API keys for:
+  - OpenAI
+  - Anthropic (Claude)
+  - Google Generative AI
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/harshitsharmaaaa/New-OpenRouter.git
+cd New-OpenRouter
+
+# Install dependencies
+bun install
 ```
-cd my-turborepo
 
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
+### Development
 
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
+```bash
+# Run all apps in development mode
+bun dev
+
+# Or run specific app
+cd apps/api-backend && bun run dev
+cd apps/dashboard-frontend && bun dev
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+### Production Build
 
-```
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
+```bash
+# Build all packages
+bun run build
 
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
+# Start frontend (production)
+cd apps/dashboard-frontend && bun start
 
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
+# Start backend (production)
+cd apps/api-backend && bun run start
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+## 📦 Monorepo Structure
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+### Apps
+- **api-backend**: Elysia-powered REST API server
+  - Integrates with OpenAI, Claude, and Google GenAI
+  - Provides unified routing to multiple AI providers
+  - Port: 3000
 
+- **dashboard-frontend**: React frontend dashboard
+  - Interactive UI for interacting with AI models
+  - Real-time data updates
+  - Port: 3001
+
+### Scripts (Root Level)
+```bash
+bun run dev         # Development mode for all apps
+bun run build       # Build all apps
+bun run lint        # Lint all code
+bun run format      # Format code with Prettier
+bun run check-types # Type check all code
 ```
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
 
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
+## 🔐 Environment Variables
+
+Create `.env` files in respective app directories:
+
+### Backend (.env)
+```
+OPENAI_API_KEY=your_openai_key
+ANTHROPIC_API_KEY=your_claude_key
+GOOGLE_API_KEY=your_google_key
 ```
 
-## Useful Links
+### Frontend (.env)
+```
+API_URL=http://localhost:3000
+```
 
-Learn more about the power of Turborepo:
+## 📡 API Endpoints
 
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+### Health Check
+```
+GET /health
+```
+
+### AI Routing
+```
+POST /api/chat
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+  "provider": "openai|claude|google",
+  "model": "gpt-4|claude-3|gemini-pro",
+  "messages": [...],
+  "temperature": 0.7
+}
+```
+
+## 🎯 Key Benefits
+
+🚀 **Performance**: Bun runtime provides 3x faster execution
+🔄 **Flexibility**: Switch between AI providers seamlessly
+🛡️ **Security**: Bearer token authentication
+🎨 **Modern UI**: Beautiful, responsive design
+⚙️ **Maintainability**: Full TypeScript codebase
+📦 **Scalability**: Monorepo structure for easy expansion
+
+## 🧪 Development Workflow
+
+```bash
+# Watch mode development
+turbo run dev
+
+# Build with caching
+turbo run build
+
+# Run linter
+turbo run lint
+
+# Type checking
+turbo run check-types
+
+# Code formatting
+bun run format
+```
+
+## 📝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is open source and available under the MIT License.
+
+## 🤝 Support
+
+For issues and questions:
+- Open an issue on GitHub
+- Check existing documentation
+- Review the codebase structure
+
+---
+
+**Built with ❤️ using Bun, Elysia, React, and TailwindCSS**
+
+*Last Updated: 2026-02-25 20:44:08*
